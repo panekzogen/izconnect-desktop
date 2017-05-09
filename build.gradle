@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: "$allJoynRelease/jar", include: 'alljoyn*.jar')
+    compile fileTree(dir: "libs", include: 'alljoyn*.jar')
 }
 
 //task syncAllJoyn(type: Sync) {
