@@ -63,7 +63,7 @@ public abstract class AbstractNetworkService {
         }
 
         AboutObj mAboutObj = new AboutObj(mBus);
-        MyAboutData mAboutData = new MyAboutData();
+        AboutDataListener mAboutData = getAboutData();
         status = mAboutObj.announce(CONTACT_PORT, mAboutData);
         if (status != Status.OK) {
             System.out.println(ALLJOYN_TAG + "Problem while sending about info");
@@ -94,4 +94,6 @@ public abstract class AbstractNetworkService {
 //        mBus.unregisterBusListener();
         mBus.disconnect();
     }
+
+    protected abstract AboutDataListener getAboutData();
 }

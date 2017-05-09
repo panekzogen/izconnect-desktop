@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -18,12 +18,15 @@
    <children>
       <BorderPane prefHeight="640.0" prefWidth="1024.0">
          <left>
-            <VBox fx:id="devicesBox" prefHeight="575.0" prefWidth="181.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="devicesBox" prefHeight="575.0" prefWidth="170.0" styleClass="devices" stylesheets="@styles/menu.css" BorderPane.alignment="CENTER">
             </VBox>
          </left>
          <top>
             <HBox prefHeight="65.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </top>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="main" stylesheets="@styles/pane.css" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </children>
 </GridPane>

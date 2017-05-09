@@ -1,0 +1,11 @@
+.device {
+    padding: 10px, 10px, 10px, 10px;
+}
+
+.device:hover {
+    -fx-border-color: black;
+}
+
+.devices {
+    -fx-background-color: white;
+}

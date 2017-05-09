@@ -1,12 +1,16 @@
 package org.taom.izconnect.gui.controllers;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import org.alljoyn.bus.ProxyBusObject;
+import javafx.scene.text.TextAlignment;
+import org.alljoyn.bus.Variant;
+import org.taom.izconnect.gui.utils.DeviceItemFactory;
+
+import java.util.Map;
 
 public class Controller {
     @FXML
@@ -16,20 +20,10 @@ public class Controller {
     public void initialize() {
     }
 
-    public void addMessage (String message) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Label label = new Label("", );
-                devicesBox.getChildren().add();
-                ObservableList<String> mess = messages.getItems();
-                mess.add(message);
-                messages.setItems(mess);
-            }
-        });
-    }
+    public void addDevice(Map<String, Variant> map) {
+        Platform.runLater(() -> {
 
-    public void addDevice(String name, ProxyBusObject device) {
-        devicesMap.put(name, device);
+            devicesBox.getChildren().add(DeviceItemFactory.createDeviceItem(map));
+        });
     }
 }
