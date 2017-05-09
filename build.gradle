@@ -1,0 +1,27 @@
+group 'org.taom'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+def allJoynRelease = "${rootDir.getParent()}/alljoyn/build/win7/x86_64/release/dist/java"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: "$allJoynRelease/jar", include: 'alljoyn*.jar')
+}
+
+//task syncAllJoyn(type: Sync) {
+//    from "$projectDir/alljoyn/build/win7/x86_64/release/obj/alljoyn_java"
+//    into "$buildDir/alljoynJava"
+//}
+
+task copyAllJoyn(type: Copy) {
+    from "$allJoynRelease/lib"
+    into "libs"
+}
+
+build.dependsOn copyAllJoyn
