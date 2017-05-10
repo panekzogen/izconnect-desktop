@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -16,7 +16,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <BorderPane prefHeight="640.0" prefWidth="1024.0">
+      <BorderPane fx:id="mainPane" prefHeight="640.0" prefWidth="1024.0">
          <left>
             <VBox fx:id="devicesBox" prefHeight="575.0" prefWidth="170.0" styleClass="devices" stylesheets="@styles/menu.css" BorderPane.alignment="CENTER">
             </VBox>
@@ -25,7 +25,7 @@
             <HBox prefHeight="65.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="main" stylesheets="@styles/pane.css" BorderPane.alignment="CENTER" />
+            <Label alignment="CENTER" prefHeight="69.0" prefWidth="441.0" text="Choose device" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

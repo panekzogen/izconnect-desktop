@@ -15,7 +15,7 @@ public class DesktopAppAboutData extends AbstractAboutData {
         } catch (UnknownHostException e) {
             deviceName.append("PC");
         } finally {
-            deviceName.append(" (").append(System.getProperty("os.name")).append(")");
+            deviceName.append(";").append(System.getProperty("os.name"));
         }
         return deviceName.toString();
     }

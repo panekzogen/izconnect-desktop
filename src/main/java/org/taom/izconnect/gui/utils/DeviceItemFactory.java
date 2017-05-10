@@ -7,10 +7,13 @@ import javafx.scene.text.TextAlignment;
 import org.alljoyn.bus.BusException;
 import org.alljoyn.bus.Variant;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class DeviceItemFactory {
-    public static Label createDeviceItem(Map<String, Variant> map) {
+    private static Map <String, Label> busNameToLabel = new HashMap<>();
+
+    public static Label createDeviceItem(String busName, Map<String, Variant> map) {
         String deviceName = "";
         try {
             deviceName = map.get("DeviceName").getObject(String.class);
@@ -22,6 +25,12 @@ public class DeviceItemFactory {
         image.setFitHeight(40);
         image.setFitWidth(40);
 
+        String[] namePaths = deviceName.split(";");
+        deviceName = "";
+        for (String path : namePaths) {
+            deviceName += path + "\n";
+        }
+
         Label label = new Label(deviceName, image);
         label.setAlignment(Pos.CENTER_LEFT);
         label.setTextAlignment(TextAlignment.RIGHT);
@@ -29,6 +38,11 @@ public class DeviceItemFactory {
         label.getStylesheets().add("styles/menu.css");
         label.getStyleClass().add("device");
 
+        busNameToLabel.put(busName, label);
         return label;
+    }
+
+    public static Label removeDeviceItem(String busName) {
+        return busNameToLabel.remove(busName);
     }
 }

@@ -8,13 +8,11 @@ public abstract class AbstractNetworkService {
 
     private static final String ALLJOYN_TAG = "Alljoyn";
 
-    private static final String PACKAGE_NAME = "org.taom.izconnect.network";
+    public static final String PACKAGE_NAME = "org.taom.izconnect.network";
     private static final String OBJECT_PATH = "/izconnectService";
     private static final short CONTACT_PORT = 4753;
 
     private BusAttachment mBus;
-    private final AboutListener aboutListener;
-    private final Observer.Listener observerListener;
     private Observer mObserver;
     private SampleService sampleService = new SampleService();
 
@@ -22,9 +20,7 @@ public abstract class AbstractNetworkService {
         System.loadLibrary("libs/alljoyn_java");
     }
 
-    public AbstractNetworkService(AboutListener aboutListener, Observer.Listener observerListener) {
-        this.aboutListener = aboutListener;
-        this.observerListener = observerListener;
+    public AbstractNetworkService() {
     }
 
     public void doConnect() {
@@ -70,12 +66,13 @@ public abstract class AbstractNetworkService {
             return;
         }
 
+        AboutListener aboutListener = getAboutListener();
         if (aboutListener != null) {
             mBus.registerAboutListener(aboutListener);
         }
 
         mBus.whoImplements(new String[]{PACKAGE_NAME});
-        mBus.whoImplements(new String[]{SampleInterface.INTERFACE_NAME});
+//        mBus.whoImplements(new String[]{SampleInterface.INTERFACE_NAME});
 
         status = mBus.registerSignalHandlers(sampleService);
         if (status != Status.OK) {
@@ -84,6 +81,7 @@ public abstract class AbstractNetworkService {
         }
 
         mObserver = new Observer(mBus, new Class[]{SampleInterface.class});
+        Observer.Listener observerListener = getObserverListener();
         if (observerListener != null) {
             mObserver.registerListener(observerListener);
         }
@@ -96,4 +94,8 @@ public abstract class AbstractNetworkService {
     }
 
     protected abstract AboutDataListener getAboutData();
+
+    protected abstract AboutListener getAboutListener();
+
+    protected abstract Observer.Listener getObserverListener();
 }

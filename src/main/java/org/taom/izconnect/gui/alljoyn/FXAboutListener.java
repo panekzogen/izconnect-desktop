@@ -16,6 +16,6 @@ public class FXAboutListener implements AboutListener {
 
     @Override
     public void announced(String s, int i, short i1, AboutObjectDescription[] aboutObjectDescriptions, Map<String, Variant> map) {
-        controller.addDevice(map);
+        controller.addDevice(s, map);
     }
 }
