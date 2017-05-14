@@ -1,38 +1,46 @@
 package org.taom.izconnect.gui.controllers;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
-import org.alljoyn.bus.BusException;
+import javafx.util.Callback;
 import org.alljoyn.bus.ProxyBusObject;
-import org.alljoyn.bus.Variant;
+import org.taom.izconnect.gui.components.DevicesListItem;
+import org.taom.izconnect.gui.components.ListViewCell;
 import org.taom.izconnect.gui.utils.DeviceItemFactory;
-import org.taom.izconnect.network.interfaces.SampleInterface;
-import org.taom.izconnect.network.interfaces.SampleService;
-
-import java.util.Map;
 
 public class Controller {
     @FXML
     private BorderPane mainPane;
 
     @FXML
-    private VBox devicesBox;
+    private ListView<DevicesListItem> devicesList;
 
     @FXML
     public void initialize() {
+        devicesList.setCellFactory(param -> new ListViewCell());
+        devicesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            
+        });
     }
 
-    public void addDevice(String busName, Map<String, Variant> map) {
-        Platform.runLater(() -> devicesBox.getChildren().add(DeviceItemFactory.createDeviceItem(busName, map)));
+    public void addDevice(DevicesListItem.DeviceType deviceType, ProxyBusObject proxyBusObject) {
+        Platform.runLater(() -> {
+            DevicesListItem devicesListItem = DeviceItemFactory.createDevice(deviceType, proxyBusObject);
+            devicesList.getItems().add(devicesListItem);
+        });
     }
 
-    public void removeDevice(String busName) {
-        Platform.runLater(() -> devicesBox.getChildren().remove(DeviceItemFactory.removeDeviceItem(busName)));
+    public void removeDevice(ProxyBusObject proxyBusObject) {
+        Platform.runLater(() -> {
+            DevicesListItem devicesListItem = DeviceItemFactory.removeDevice(proxyBusObject);
+            if (devicesListItem != null) {
+                devicesList.getItems().remove(devicesListItem);
+            }
+        });
     }
 }

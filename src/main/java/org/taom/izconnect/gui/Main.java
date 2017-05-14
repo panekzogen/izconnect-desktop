@@ -5,23 +5,23 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.*;
 import javafx.stage.Stage;
 import org.taom.izconnect.gui.alljoyn.FXNetworkService;
+import org.taom.izconnect.gui.alljoyn.PCServiceImpl;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
-    private FXNetworkService networkService;
     private boolean firstTime;
     private TrayIcon trayIcon;
+
+    private FXNetworkService networkService;
+    private PCServiceImpl pcService;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -29,15 +29,19 @@ public class Main extends Application {
         firstTime = true;
         Platform.setImplicitExit(false);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("main.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("IZConnect Desktop Application");
         primaryStage.setScene(new Scene(root, 1024, 640));
         primaryStage.getIcons().add(new javafx.scene.image.Image("graphics/trayicon.png"));
         primaryStage.show();
 
+        pcService = new PCServiceImpl();
         networkService = new FXNetworkService(fxmlLoader.getController());
         networkService.doConnect();
+        networkService.registerInterface(pcService);
+        networkService.registerListeners();
+        networkService.announce();
     }
 
 
@@ -47,6 +51,8 @@ public class Main extends Application {
 
     @Override
     public void stop() throws Exception {
+        networkService.unregisterInterface(pcService);
+        networkService.unregisterListeners();
         networkService.doDisconnect();
     }
 
