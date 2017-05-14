@@ -1,19 +1,22 @@
 package org.taom.izconnect.gui.controllers;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
+import javafx.scene.layout.Pane;
 import org.alljoyn.bus.ProxyBusObject;
 import org.taom.izconnect.gui.components.DevicesListItem;
 import org.taom.izconnect.gui.components.ListViewCell;
+import org.taom.izconnect.gui.utils.DeviceControlsFactory;
 import org.taom.izconnect.gui.utils.DeviceItemFactory;
 
+import java.io.IOException;
+
 public class Controller {
+    private static final String TAG = "Controller";
+
     @FXML
     private BorderPane mainPane;
 
@@ -21,10 +24,13 @@ public class Controller {
     private ListView<DevicesListItem> devicesList;
 
     @FXML
+    private Pane controlsPane;
+
+    @FXML
     public void initialize() {
         devicesList.setCellFactory(param -> new ListViewCell());
         devicesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            
+            DeviceControlsFactory.setViewForDevice(this, controlsPane.getChildren(), newValue.getDeviceType());
         });
     }
 

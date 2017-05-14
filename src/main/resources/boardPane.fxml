@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox prefHeight="535" prefWidth="750" spacing="10.0" styleClass="pane" stylesheets="@styles/pane.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="650.0">
+            <children>
+                <Label prefHeight="24.0" prefWidth="584.0" text="Turn something On/Off" />
+                <ToggleButton mnemonicParsing="false" text="On/Off">
+                    <font>
+                        <Font name="Tahoma" size="14.0" />
+                    </font></ToggleButton>
+            </children>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+</VBox>

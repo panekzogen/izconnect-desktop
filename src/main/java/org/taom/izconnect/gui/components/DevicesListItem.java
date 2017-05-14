@@ -1,19 +1,25 @@
 package org.taom.izconnect.gui.components;
 
+import org.taom.izconnect.network.interfaces.BoardInterface;
+import org.taom.izconnect.network.interfaces.MobileInterface;
+import org.taom.izconnect.network.interfaces.PCInterface;
+
 public class DevicesListItem {
 
     public enum DeviceType {
-        BOARD(1, ""),
-        MOBILE(2, "graphics/mobile.png"),
-        PC(3, "graphics/pc.png"),
-        UNKNOWN(4, "");
+        BOARD(1, "graphics/board.png", BoardInterface.class),
+        MOBILE(2, "graphics/mobile.png", MobileInterface.class),
+        PC(3, "graphics/pc.png", PCInterface.class),
+        UNKNOWN(4, "", null);
 
         private final int id;
         private final String iconPath;
+        private final Class interfaceClass;
 
-        DeviceType(int id, String iconPath) {
+        DeviceType(int id, String iconPath, Class interfaceClass) {
             this.id = id;
             this.iconPath = iconPath;
+            this.interfaceClass = interfaceClass;
         }
 
         public int getId() {
@@ -22,6 +28,10 @@ public class DevicesListItem {
 
         public String getIconPath() {
             return iconPath;
+        }
+
+        public Class getInterfaceClass() {
+            return interfaceClass;
         }
 
         public static DeviceType valueOf(int id) {

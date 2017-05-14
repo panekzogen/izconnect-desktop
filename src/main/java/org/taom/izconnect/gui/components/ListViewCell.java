@@ -9,6 +9,8 @@ public class ListViewCell extends ListCell<DevicesListItem> {
         if (item != null) {
             DeviceItemHolder deviceItemHolder = new DeviceItemHolder(item);
             setGraphic(deviceItemHolder.getBox());
+        } else {
+            setGraphic(null);
         }
     }
 }

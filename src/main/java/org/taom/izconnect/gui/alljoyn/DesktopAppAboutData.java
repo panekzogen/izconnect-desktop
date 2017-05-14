@@ -9,14 +9,15 @@ public class DesktopAppAboutData extends AbstractAboutData {
 
     @Override
     protected String getDeviceName() {
-        StringBuilder deviceName = new StringBuilder();
         try {
-            deviceName.append(InetAddress.getLocalHost().getHostName());
+            return InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
-            deviceName.append("PC");
-        } finally {
-            deviceName.append(";").append(System.getProperty("os.name"));
+            return  "PC";
         }
-        return deviceName.toString();
+    }
+
+    @Override
+    protected String getSoftwareVersion() {
+        return System.getProperty("os.name");
     }
 }

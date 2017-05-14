@@ -32,7 +32,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("main.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("IZConnect Desktop Application");
-        primaryStage.setScene(new Scene(root, 1024, 640));
+        primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.getIcons().add(new javafx.scene.image.Image("graphics/trayicon.png"));
         primaryStage.show();
 
