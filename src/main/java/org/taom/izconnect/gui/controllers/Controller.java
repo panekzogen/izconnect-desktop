@@ -6,11 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import org.alljoyn.bus.BusException;
 import org.alljoyn.bus.ProxyBusObject;
 import org.taom.izconnect.gui.components.DevicesListItem;
 import org.taom.izconnect.gui.components.ListViewCell;
 import org.taom.izconnect.gui.utils.DeviceControlsFactory;
 import org.taom.izconnect.gui.utils.DeviceItemFactory;
+import org.taom.izconnect.network.interfaces.MobileInterface;
 
 import java.io.IOException;
 
@@ -30,7 +32,7 @@ public class Controller {
     public void initialize() {
         devicesList.setCellFactory(param -> new ListViewCell());
         devicesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            DeviceControlsFactory.setViewForDevice(this, controlsPane.getChildren(), newValue.getDeviceType());
+            DeviceControlsFactory.setViewForDevice(this, controlsPane.getChildren(), newValue);
         });
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.taom.izconnect.gui.alljoyn.FXNetworkService;
 import org.taom.izconnect.gui.alljoyn.PCServiceImpl;
+import org.taom.izconnect.gui.utils.DeviceControlsFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -42,6 +43,8 @@ public class Main extends Application {
         networkService.registerInterface(pcService);
         networkService.registerListeners();
         networkService.announce();
+
+        DeviceControlsFactory.setBusName(networkService.getBusName());
     }
 
 

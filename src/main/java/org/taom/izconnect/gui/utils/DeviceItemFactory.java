@@ -5,6 +5,8 @@ import org.alljoyn.bus.ProxyBusObject;
 import org.alljoyn.bus.Variant;
 import org.taom.izconnect.gui.components.DevicesListItem;
 import org.taom.izconnect.network.GFLogger;
+import org.taom.izconnect.network.interfaces.DeviceInfoInterface;
+import org.taom.izconnect.network.interfaces.PCInterface;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,6 +26,7 @@ public class DeviceItemFactory {
             deviceOS = map.get("DeviceOS").getObject(String.class);
         } catch (BusException e) {
             GFLogger.log(Level.SEVERE, "DeviceFactory", "Cannot get device info.");
+            e.printStackTrace();
             deviceName = "UNKNOWN";
             deviceOS = "UNKNOWN";
         }
