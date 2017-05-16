@@ -17,6 +17,8 @@ public class PCServiceImpl implements BusObject, PCInterface {
     private static final String NIRCMD_PATH = "tools/nircmd/nircmd.exe";
     private static final String TAG = "PCInterface";
 
+    private TrayIcon trayIcon;
+
     private int volumeLevel = 0;
     private Robot robot;
 
@@ -25,7 +27,8 @@ public class PCServiceImpl implements BusObject, PCInterface {
     private static int VK_MEDIA_NEXT_TRACK = 0xB0;
     private static int VK_MEDIA_PREV_TRACK = 0xB1;
 
-    public PCServiceImpl() {
+    public PCServiceImpl(TrayIcon trayIcon) {
+        this.trayIcon = trayIcon;
         try {
             this.robot = new Robot();
         } catch (AWTException e) {
@@ -173,8 +176,10 @@ public class PCServiceImpl implements BusObject, PCInterface {
     }
 
     @Override
-    public void notify(String sender, String notification) throws BusException {
-        System.out.println(sender + ":" + notification);
+    public void notify(String deviceName, String sender, String notification) throws BusException {
+        trayIcon.displayMessage(sender + " (" + deviceName + ")",
+                notification,
+                TrayIcon.MessageType.INFO);
     }
 
     @Override

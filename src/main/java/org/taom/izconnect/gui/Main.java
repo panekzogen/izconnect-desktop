@@ -37,7 +37,7 @@ public class Main extends Application {
         primaryStage.getIcons().add(new javafx.scene.image.Image("graphics/trayicon.png"));
         primaryStage.show();
 
-        pcService = new PCServiceImpl();
+        pcService = new PCServiceImpl(trayIcon);
         networkService = new FXNetworkService(fxmlLoader.getController());
         networkService.doConnect();
         networkService.registerInterface(pcService);
