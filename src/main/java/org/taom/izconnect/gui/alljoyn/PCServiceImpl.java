@@ -1,5 +1,6 @@
 package org.taom.izconnect.gui.alljoyn;
 
+import javafx.application.Platform;
 import org.alljoyn.bus.BusException;
 import org.alljoyn.bus.BusObject;
 import org.taom.izconnect.network.GFLogger;
@@ -19,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 public class PCServiceImpl implements BusObject, PCInterface {
+    private static final File IZCONNECT_FOLDER = new File("/usr/izconnect");
     private static final String NIRCMD_PATH = "tools/nircmd/nircmd.exe";
     private static final String TAG = "PCInterface";
     private Map<String, FileOutputStream> incomingFiles = new ConcurrentHashMap<>();
@@ -177,7 +179,17 @@ public class PCServiceImpl implements BusObject, PCInterface {
     }
 
     @Override
-    public void fileData(String filename, byte[] data) throws BusException {
+    public void runScript(String scriptName) throws BusException {
+        Runtime rt = Runtime.getRuntime();
+        try {
+            rt.exec(new File(IZCONNECT_FOLDER, "scripts/" + scriptName).getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void fileData(String filename, byte[] data, boolean isScript) throws BusException {
         if (data.length == 0) {
             FileOutputStream out = incomingFiles.get(filename);
             if (out != null) {
@@ -190,7 +202,7 @@ public class PCServiceImpl implements BusObject, PCInterface {
                 }
             }
         } else {
-            File root = new File(System.getProperty("user.home"), "izconnect");
+            File root = new File(IZCONNECT_FOLDER, isScript ? "scripts" : "");
             if(!root.exists()) {
                 root.mkdirs();
             }
