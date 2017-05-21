@@ -4,21 +4,47 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import org.taom.izconnect.gui.components.SwitchButton?>
 
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.ToggleSwitch?>
 <VBox prefHeight="535" prefWidth="750" spacing="10.0" styleClass="pane" stylesheets="@styles/pane.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="650.0">
             <children>
-                <Label prefHeight="24.0" prefWidth="556.0" text="Turn something On/Off" />
-                <SwitchButton fx:id="lightControl" prefHeight="25.0" prefWidth="78.0">
-                </SwitchButton>
+                <Label prefHeight="30.0" prefWidth="497.0" text="Turn light">
+                    <font>
+                        <Font size="15.0" />
+                    </font></Label>
+                <ToggleSwitch fx:id="lightControl" scaleX="1.4" scaleY="1.25">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </ToggleSwitch>
             </children>
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                <Insets bottom="10.0" left="70.0" right="20.0" top="10.0" />
+            </padding>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="650.0">
+            <children>
+                <Label prefHeight="30.0" prefWidth="497.0" text="Automatic mode">
+                    <font>
+                        <Font size="15.0" />
+                    </font></Label>
+                <ToggleSwitch fx:id="autoMode" scaleX="1.4" scaleY="1.25">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </ToggleSwitch>
+            </children>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="70.0" right="20.0" top="10.0" />
             </padding>
         </HBox>
     </children>

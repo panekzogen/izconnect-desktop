@@ -4,22 +4,55 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import org.taom.izconnect.gui.components.SwitchButton?>
 
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.ToggleSwitch?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
 <VBox prefHeight="535" prefWidth="750" spacing="10.0" styleClass="pane" stylesheets="@styles/pane.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="650.0">
             <children>
-                <Label prefHeight="24.0" prefWidth="556.0" text="Notification subscription" />
-                <SwitchButton fx:id="notificationsControl" prefHeight="25.0" prefWidth="73.0">
-                </SwitchButton>
+                <Label prefHeight="30.0" prefWidth="497.0" text="Subscribe notifications">
+                    <font>
+                        <Font size="15.0" />
+                    </font></Label>
+                <ToggleSwitch fx:id="notifications" scaleX="1.4" scaleY="1.25">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </ToggleSwitch>
             </children>
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                <Insets bottom="10.0" left="70.0" right="20.0" top="10.0" />
             </padding>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="650.0">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="70.0" right="20.0" top="10.0" />
+            </padding>
+            <children>
+                <TextField fx:id="filePath" prefHeight="25.0" prefWidth="278.0" />
+                <Button fx:id="chooseButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Choose file">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="sendButton" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Send">
+                    <HBox.margin>
+                        <Insets left="110.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            </children>
         </HBox>
     </children>
     <padding>

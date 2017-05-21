@@ -2,6 +2,7 @@ package org.taom.izconnect.network.interfaces;
 
 import org.alljoyn.bus.BusException;
 import org.alljoyn.bus.annotation.BusInterface;
+import org.alljoyn.bus.annotation.BusMethod;
 import org.alljoyn.bus.annotation.BusProperty;
 import org.alljoyn.bus.annotation.BusSignal;
 
@@ -13,6 +14,13 @@ public interface BoardInterface extends DeviceInfoInterface {
     @BusProperty
     void setLight(boolean turnOn) throws BusException;
 
-    @BusSignal
-    void message(String str) throws BusException;
+    @BusProperty
+    boolean getLight() throws BusException;
+
+    @BusProperty
+    void setAutoMode(boolean autoMode) throws BusException;
+
+    @BusProperty
+    boolean getAutoMode() throws BusException;
+
 }

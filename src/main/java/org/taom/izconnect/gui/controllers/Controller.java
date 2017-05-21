@@ -3,7 +3,9 @@ package org.taom.izconnect.gui.controllers;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.alljoyn.bus.BusException;
@@ -27,6 +29,12 @@ public class Controller {
 
     @FXML
     private Pane controlsPane;
+
+    @FXML
+    public Label statusBar;
+
+    @FXML
+    public ProgressBar progressBar;
 
     @FXML
     public void initialize() {

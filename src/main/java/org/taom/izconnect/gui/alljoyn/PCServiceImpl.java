@@ -8,14 +8,20 @@ import org.taom.izconnect.network.interfaces.PCInterface;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 public class PCServiceImpl implements BusObject, PCInterface {
     private static final String NIRCMD_PATH = "tools/nircmd/nircmd.exe";
     private static final String TAG = "PCInterface";
+    private Map<String, FileOutputStream> incomingFiles = new ConcurrentHashMap<>();
 
     private TrayIcon trayIcon;
 
@@ -167,6 +173,46 @@ public class PCServiceImpl implements BusObject, PCInterface {
             Runtime.getRuntime().exec(PCServiceImpl.NIRCMD_PATH + " sendkeypress " + KeyEvent.VK_LEFT);
         } catch (IOException e) {
             GFLogger.log(Level.SEVERE, TAG, "Cannot emit key press");
+        }
+    }
+
+    @Override
+    public void fileData(String filename, byte[] data) throws BusException {
+        if (data.length == 0) {
+            FileOutputStream out = incomingFiles.get(filename);
+            if (out != null) {
+                incomingFiles.remove(filename);
+                try {
+                    out.flush();
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            File root = new File(System.getProperty("user.home"), "izconnect");
+            if(!root.exists()) {
+                root.mkdirs();
+            }
+            File received = new File(root, filename);
+
+            FileOutputStream out = incomingFiles.get(filename);
+            if (out == null) {
+                if (received.exists()) {
+                    received.delete();
+                }
+                try {
+                    out = new FileOutputStream(received,true);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                incomingFiles.put(filename, out);
+            }
+            try {
+                out.write(data);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
