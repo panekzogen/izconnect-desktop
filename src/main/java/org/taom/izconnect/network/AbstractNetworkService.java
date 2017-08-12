@@ -25,7 +25,7 @@ public abstract class AbstractNetworkService {
     private AboutDataListener mAboutData;
 
     static {
-        System.loadLibrary("libs/alljoyn_java");
+            System.loadLibrary("libs/alljoyn_java");
     }
 
     public AbstractNetworkService() {

@@ -45,6 +45,7 @@ public class Controller {
     }
 
     public void addDevice(DevicesListItem.DeviceType deviceType, ProxyBusObject proxyBusObject) {
+        if(!proxyBusObject.getBusName().equals(DeviceControlsFactory.busName))
         Platform.runLater(() -> {
             DevicesListItem devicesListItem = DeviceItemFactory.createDevice(deviceType, proxyBusObject);
             devicesList.getItems().add(devicesListItem);

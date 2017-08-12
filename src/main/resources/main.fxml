@@ -54,7 +54,7 @@
          <bottom>
             <HBox maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="statusBar" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="799.0" style="-fx-background-color: white; -fx-border-color: gray;" text="Status bar in the near future">
+                  <Label fx:id="statusBar" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="799.0" style="-fx-background-color: white; -fx-border-color: gray;" text="">
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<shortcuts>
+
+    <programGroup defaultName="IzForge/IzPack"
+                  location="applications"/>
+    <shortcut
+            name="Launcher"
+            target="java"
+            commandLine="-cp build\izconnect.jar org.taom.izconnect.gui.Main"
+            workingDirectory="$INSTALL_PATH"
+            iconFile="$INSTALL_PATH\icon.ico"
+            programGroup="no"
+            desktop="yes"
+            applications="yes"
+            startMenu="no"
+            startup="yes"
+            description="IZConnect">
+        <createForPack name="Core"/>
+    </shortcut>
+
+</shortcuts>

@@ -1,27 +1,59 @@
 group 'org.taom'
-version '1.0-SNAPSHOT'
+version '1.0'
 
-apply plugin: 'java'
 
-sourceCompatibility = 1.8
-def allJoynRelease = "${rootDir.getParent()}/alljoyn/build/win7/x86_64/release/dist/java"
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-izpack-plugin:2.1'
+    }
+}
 
 repositories {
     mavenCentral()
+    jcenter()
+}
+
+apply plugin: 'com.bmuschko.izpack'
+
+configurations {
+    izpack
+    compile
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: 'alljoyn*.jar')
+    izpack 'org.codehaus.izpack:izpack-standalone-compiler:4.3.4'
+//    izpack 'org.codehaus.izpack:izpack-ant:5.0.7'
+    compile fileTree(dir: "$projectDir/libs", include: 'alljoyn*.jar')
+    compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.12'
 }
 
+apply plugin: 'java'
+
+file("$buildDir/installer").mkdirs()
+
+izpack {
+    baseDir = file("$buildDir")
+    installFile = file("$projectDir/installer/installer.xml")
+    outputFile = file("$buildDir/distributions/izconnect-${version}-installer.jar")
+    compression = 'deflate'
+    compressionLevel = 9
+    appProperties = ['app.group': 'Griffon', 'app.name': 'griffon', 'app.title': 'Griffon',
+                     'app.version': version, 'app.subpath': "Griffon-$version"]
+}
+
+
+task createJar (type: Jar) {
+    from project.file ("src/main/resources")
+    from(project.file ("src/main/java"), {
+        include 'org/**'
+    })
+    archiveName 'izconnect-desktop-sources.jar'
+}
 //task syncAllJoyn(type: Sync) {
 //    from "$projectDir/alljoyn/build/win7/x86_64/release/obj/alljoyn_java"
 //    into "$buildDir/alljoynJava"
 //}
-
-task copyAllJoyn(type: Copy) {
-    from "$allJoynRelease/lib"
-    into "libs"
-}
-
-build.dependsOn copyAllJoyn

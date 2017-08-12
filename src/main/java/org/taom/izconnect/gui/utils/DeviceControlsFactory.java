@@ -39,7 +39,7 @@ import static org.taom.izconnect.gui.components.DevicesListItem.DeviceType;
 
 public class DeviceControlsFactory {
     private static final int MAX_BYTES = 114500;
-    private static String busName;
+    public static String busName;
     private static final File SCRIPTS_FOLDER = new File(System.getProperty("user.home"), "izconnect/scripts");
 
     public static void setViewForDevice(Controller controller, ObservableList<Node> children, DevicesListItem device) {
